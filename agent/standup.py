@@ -87,7 +87,15 @@ Return only valid JSON, no extra text.
         messages=[{"role": "user", "content": prompt}]
     )
 
-    return json.loads(response.content[0].text)
+    text = response.content[0].text.strip()
+    # Claude sometimes wraps JSON in ```json ... ``` markdown fences — strip them
+    if text.startswith("```"):
+        text = text.split("```")[1]
+        if text.startswith("json"):
+            text = text[4:]
+        text = text.strip()
+
+    return json.loads(text)
 
 
 def run_standup():

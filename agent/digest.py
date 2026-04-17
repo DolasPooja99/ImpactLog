@@ -59,7 +59,14 @@ Return only valid JSON, no extra text.
         messages=[{"role": "user", "content": prompt}]
     )
 
-    digest = json.loads(response.content[0].text)
+    text = response.content[0].text.strip()
+    if text.startswith("```"):
+        text = text.split("```")[1]
+        if text.startswith("json"):
+            text = text[4:]
+        text = text.strip()
+
+    digest = json.loads(text)
 
     _display_digest(digest, week_start, week_end, list(set(all_tags)))
 
