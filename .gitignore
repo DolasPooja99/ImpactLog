@@ -1,0 +1,17 @@
+# Environment variables - NEVER commit this
+.env
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+.venv/
+
+# Database (local data, personal to each user)
+*.db
+
+# OS files
+.DS_Store
