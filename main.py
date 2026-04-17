@@ -5,6 +5,7 @@ from storage.db import init_db
 from agent.standup import run_standup
 from agent.digest import generate_weekly_digest
 from agent.history import show_history
+from agent.export import export_markdown
 
 console = Console()
 
@@ -15,11 +16,12 @@ def show_menu():
         "[1] Log today's standup\n"
         "[2] View weekly digest\n"
         "[3] View standup history\n"
-        "[4] Exit",
+        "[4] Export to Markdown (perf doc)\n"
+        "[5] Exit",
         title="Main Menu",
         expand=False
     ))
-    return Prompt.ask("\nChoose", choices=["1", "2", "3", "4"])
+    return Prompt.ask("\nChoose", choices=["1", "2", "3", "4", "5"])
 
 
 def main():
@@ -37,6 +39,8 @@ def main():
         elif choice == "3":
             show_history()
         elif choice == "4":
+            export_markdown()
+        elif choice == "5":
             console.print("\n[green]Keep shipping! See you tomorrow.[/green]\n")
             break
 

@@ -13,5 +13,8 @@ venv/
 # Database (local data, personal to each user)
 *.db
 
+# Exported perf docs (personal data)
+impactlog_export_*.md
+
 # OS files
 .DS_Store
