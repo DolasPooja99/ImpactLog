@@ -4,6 +4,7 @@ from rich.prompt import Prompt
 from storage.db import init_db
 from agent.standup import run_standup
 from agent.digest import generate_weekly_digest
+from agent.history import show_history
 
 console = Console()
 
@@ -13,15 +14,16 @@ def show_menu():
         "[bold green]ImpactLog[/bold green] — Track your wins. Own your career.\n\n"
         "[1] Log today's standup\n"
         "[2] View weekly digest\n"
-        "[3] Exit",
+        "[3] View standup history\n"
+        "[4] Exit",
         title="Main Menu",
         expand=False
     ))
-    return Prompt.ask("\nChoose", choices=["1", "2", "3"])
+    return Prompt.ask("\nChoose", choices=["1", "2", "3", "4"])
 
 
 def main():
-    init_db()  # create DB tables if they don't exist yet
+    init_db()
 
     console.print("\n[bold green]Welcome to ImpactLog[/bold green]\n")
 
@@ -33,6 +35,8 @@ def main():
         elif choice == "2":
             generate_weekly_digest()
         elif choice == "3":
+            show_history()
+        elif choice == "4":
             console.print("\n[green]Keep shipping! See you tomorrow.[/green]\n")
             break
 
